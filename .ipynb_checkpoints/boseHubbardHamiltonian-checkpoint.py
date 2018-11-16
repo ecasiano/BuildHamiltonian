@@ -125,9 +125,9 @@ def main():
     
     #BUG REPORT: ONLY WORKS FOR N <= L at the moment
     #Parameters
-    L = 6
-    N = 3
-    lA = 3
+    L = 10
+    N = 5
+    lA = 5
     t = 1
     V = 0
     

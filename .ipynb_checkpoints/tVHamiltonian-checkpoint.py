@@ -117,9 +117,9 @@ def main():
     
     #BUG REPORT: ONLY WORKS FOR N <= L at the moment
     #Parameters
-    L = 6       #Number of lattice sites
-    N = 3       #Number of total particles
-    lA =3       #Size of partition A
+    L = 4       #Number of lattice sites
+    N = 2       #Number of total particles
+    lA = 2       #Size of partition A
     t = 1       #Hopping parameter
     V = 0       #Interaction Strength
     
