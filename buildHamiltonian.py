@@ -295,7 +295,7 @@ def main():
         psi = evecs[:,0]
         print("")
         print("Ground State Energy: ",egs)
-        print("Ground State:   ",psi)
+        print("Ground State:   ",list(zip(configurations,psi)))
         print("norm(psi): ",np.linalg.norm(psi))
         print("")
 
