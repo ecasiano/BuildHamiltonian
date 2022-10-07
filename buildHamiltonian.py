@@ -105,6 +105,19 @@ def boseHubbardKinetic(bra,ket,t=1):
         
     return -kineticSum
 
+def boseHubbardPotential(bra,ket,V=3.3):
+    '''Give a state and apply the potential energy operator of BH-Model
+    to determine its contribution to the total potential energy'''
+
+    m = np.copy(ket)
+    L = np.shape(ket)[0] # Number of total sites in the configuration
+    potentialSum = 0 # Initialize total potential energy contribution
+    
+    for i in range(L):
+        potentialSum += (V/2)*m[i]*(m[i]-1)
+        
+    return potentialSum
+
 def tVKinetic(bra,ket,t=1):
     '''Give a state and apply the kinetic operator of the BH-Model
     to determine its contribution to the total kinetic energy'''
@@ -159,7 +172,7 @@ def tVKinetic(bra,ket,t=1):
         
     return -kineticSum
 
-def boseHubbardHamiltonian(configurations):
+def boseHubbardHamiltonian(configurations,V):
     '''Input: Set of all possible configurations of bosons on a 1D Lattice'''
     
     #Store HilbertSpace Size
@@ -181,6 +194,12 @@ def boseHubbardHamiltonian(configurations):
             ket = configurations[j]
             H[i,j] = boseHubbardKinetic(bra,ket)
             H[j,i] = H[i,j] #Use Hermiticity to fill up lower diagonal
+
+    for i in range(hilbertSize):
+        bra = configurations[i]
+        ket = configurations[i]
+        
+        H[i,i] = boseHubbardPotential(bra,ket,V)
             
     return H
 
@@ -248,11 +267,11 @@ def main():
     
     #BUG REPORT: ONLY WORKS FOR N <= L at the moment
     #Parameters
-    L = 6
-    N = 3
-    lA = 3
+    L = 4
+    N = 4
+    lA = 2
     t = 1
-    V = 0
+    V = 3.3
     
     '''---Bosons---'''
     if args.bosons:
@@ -261,7 +280,7 @@ def main():
         print("Configurations: ",configurations)
 
         #Hamiltonian
-        H = (boseHubbardHamiltonian(configurations))
+        H = (boseHubbardHamiltonian(configurations,V))
 
         print("")
         print("L=%d, N=%d, t=1, V = 0"%(L,N))
